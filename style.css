@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -9,7 +13,6 @@
     grid-template-areas: 
     "sidebar usermenu"
     "sidebar activityDash";
-    gap: 1vmin;
 }
 
 /* left-side sidebar*/
@@ -28,11 +31,111 @@
 
 .sidebar > h1 {
     height: 100%;
+    font-size: 4vmin;
+    position: relative;
+    top: -1vmin;
+    left:8vmin;
+}
+
+.sidebar > h1::before {
+    content: "------------";
+    text-align: right;
+    letter-spacing: -1vmin;
+    text-shadow: 
+    0.6vmin 0.5vmin black,
+    0.6vmin 0.3vmin white,
+    -0.4vmin -0.4vmin gold,
+    -0.6vmin -0.55vmin black,
+    -0.4vmin -0.7vmin gold,
+    -0.4vmin -0.8vmin gold,
+    0.6vmin 0.4vmin white;
+    font-size: 2vmin;
+    color: white;
+    background-color: black;
+    width: 3vmin;
+    height: 3vmin;
+    position: absolute;
+    border-radius: 50%;
+    top: 0vmin;
+    left: -6vmin;
+    border: 0.6vmin solid white;
+    box-shadow: 
+    0.1vmin -0.3vmin black inset,
+    -0.1vmin -0.3vmin black inset,
+    0.4vmin 0.4vmin gold inset,
+    0.8vmin 0.8vmin coral inset,
+    1.2vmin 1.2vmin gold inset,
+    1.6vmin 1.6vmin coral inset,
+    2vmin 2vmin gold inset,
+    2.4vmin 2.4vmin coral inset,
+    0.3vmin 0vmin red, 
+    0vmin .3vmin red, 
+    0vmin -0.4vmin white,
+    0.57vmin 0.15vmin black,
+    0.57vmin 0vmin white,
+    0.75vmin 0.25vmin gold,
+    0.85vmin 0vmin red,
+    0.5vmin -0.25vmin red,
+    0.5vmin -0.5vmin gold,
+    0.5vmin 0.5vmin red,
+    0.7vmin 0.6vmin white;
+    transform: scaleY(-1) scaleX(-1);
+}
+
+.sidebar > h1::after {
+    content: "^";
+    text-shadow: 
+    0 -0.3vmin black;
+    font-weight: bolder;
+    letter-spacing: -1.1vmin;
+    writing-mode: vertical-lr;
+    white-space: pre-wrap;
+    font-size: 3vmin;
+    color: gold;
+    background-color: red;
+    position: absolute;
+    top: 2vmin;
+    left: -3.6vmin;
+    height: 0.7vmin;
+    width: 1.3vmin;
+    border-radius: 0 0 1.5vmin 1.5vmin;
+    box-shadow: 
+    0vmin 0.15vmin black inset,
+    0.2vmin 0 black inset,
+    -0.2vmin 0 black inset,
+    0vmin -0.2vmin black inset,
+    0.3vmin 0 white inset,
+    -0.3vmin 0 white inset,
+    0vmin -0.3vmin white inset,
+    0.55vmin 0vmin gold,
+    -1vmin 0vmin gold,
+    -2vmin 0vmin red,
+    -3vmin 0vmin gold,
+    0.25vmin 0.5vmin orange,
+    -0.75vmin 0.5vmin red,
+    -1.75vmin 0.5vmin yellow,
+    -2.75vmin 0.5vmin orange,
+    -0.25vmin 1vmin white,
+    -1.25vmin 1vmin coral,
+    -2.25vmin 1vmin white,
+    -0.75vmin 1.5vmin red,
+    -1.75vmin 1.5vmin gold,
+    -1.25vmin 1.75vmin red,
+    0.55vmin 0.5vmin gold,
+    0.3vmin 1.25vmin gold,
+    0.3vmin 1vmin gold,
+    0.6vmin 1.25vmin red,
+    0.35vmin 1.4vmin red,
+    -0.25vmin 1.75vmin lightsalmon,
+    -0.75vmin 2vmin gold;
 }
 
 /*right-side top header menu*/
 .userMenu {
     grid-area: usermenu;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    padding: 0 1vmin 0 1vmin;
 }
 
 .searchMenu {
