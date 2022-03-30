@@ -1,3 +1,8 @@
+@font-face {
+    font-family: '8bit';
+    src: url('fonts/VT323-Regular.ttf');
+}
+
 body {
     margin: 0;
 }
@@ -17,11 +22,14 @@ body {
 
 /* left-side sidebar*/
 .sidebar {
-    background-color: aqua;
+    background: linear-gradient(to bottom, rgba(255,168,76,1) 0%,rgba(255,123,13,1) 100%);
+    box-shadow: 0vmin 0.5vmin 0.5vmin 0.5vmin rgba(255, 127, 80, 0.75), 
+    0vmin 0.75vmin 0.5vmin 0.5vmin beige;
     grid-area: sidebar;
     display: grid;
     grid-template-rows: 0.5fr 1fr 4.5fr;
     padding: 0 1vmin 0 1vmin;
+    z-index: 1;
 }
 
 .sidebar > ul {
@@ -30,14 +38,22 @@ body {
 }
 
 .sidebar > h1 {
+    font-family: '8bit', 'Courier New', Courier, monospace;
+    background-image: linear-gradient(135deg, rgba(169,3,41,0.6) 0%,rgba(143,2,34,0.8) 44%,rgba(109,0,25,1) 100%);
+    background-size: contain;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: 0.5vmin;
     height: 100%;
-    font-size: 4vmin;
+    font-size: 6vmin;
     position: relative;
     top: -1vmin;
-    left:8vmin;
+    left:7vmin;
+    text-shadow: 0vmin 0.5vmin white;
 }
 
 .sidebar > h1::before {
+    font-family: Times;
     content: "------------";
     text-align: right;
     letter-spacing: -1vmin;
@@ -56,7 +72,7 @@ body {
     height: 3vmin;
     position: absolute;
     border-radius: 50%;
-    top: 0vmin;
+    top: 1.25vmin;
     left: -6vmin;
     border: 0.6vmin solid white;
     box-shadow: 
@@ -83,6 +99,7 @@ body {
 }
 
 .sidebar > h1::after {
+    font-family: Times;
     content: "^";
     text-shadow: 
     0 -0.3vmin black;
@@ -94,7 +111,7 @@ body {
     color: gold;
     background-color: red;
     position: absolute;
-    top: 2vmin;
+    top: 3.25vmin;
     left: -3.6vmin;
     height: 0.7vmin;
     width: 1.3vmin;
