@@ -11,8 +11,9 @@
 
 body {
     margin: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 * {
@@ -35,16 +36,21 @@ li > img {
     border-radius: 50%;
 }
 
-/* left-side sidebar*/
+/* left-side nav sidebar*/
+/**/
 .sidebar {
+    position: relative;
     background: linear-gradient(to bottom, rgba(255,168,76,1) 0%,rgba(255,123,13,1) 100%);
-    box-shadow: 0vmin 0.5vmin 0.5vmin 0.5vmin rgba(255, 127, 80, 0.75), 
+    box-shadow: 0vmin 0.125vmin 1vmin 0.125vmin var(--secondary-color), 
     0vmin 0.75vmin 0.5vmin 0.5vmin beige;
     grid-area: sidebar;
     display: grid;
-    grid-template-rows: 0.5fr 1fr 3fr;
+    grid-template-rows: 0.25fr 0.5fr 1fr;
     padding: 0 1vmin 0 1vmin;
     z-index: 1;
+    min-width: 30vmin;
+    height: 100vh;
+    overflow: auto;
 }
 
 .sidebar > h1 {
@@ -55,6 +61,7 @@ li > img {
     color: transparent;
     letter-spacing: 0.5vmin;
     height: 100%;
+    max-width: 100%;
     font-size: 6vmin;
     position: relative;
     top: -1vmin;
@@ -62,7 +69,9 @@ li > img {
     text-shadow: 0vmin 0.5vmin white;
 }
 
+/*the following before and after create the chicken icon next to the h1 header*/
 .sidebar > h1::before {
+    position: absolute;
     font-family: Times;
     content: "------------";
     text-align: right;
@@ -80,7 +89,6 @@ li > img {
     background-color: black;
     width: 3vmin;
     height: 3vmin;
-    position: absolute;
     border-radius: 50%;
     top: 1.25vmin;
     left: -6vmin;
@@ -158,14 +166,17 @@ li > img {
 }
 
 .sidebar > ul {
+    position: relative;
     list-style: none;
     margin: 0;
-    padding: 0 2vmin 0 2vmin;
+    padding: 0 2vmin 0vmin 2vmin;
  }
 
  .sidebar > ul > li {
+    width: fit-content;
     position: relative;
     left: 3vmin;
+    margin: 1vmin 0 1vmin 0;
     font-family: '8bit', 'Courier New', Courier, monospace;
     font-size: 3vmin;
     color: white;
@@ -176,6 +187,16 @@ li > img {
     1px 1px 0 var(--main-color);
  }
 
+ .sidebar > ul > li:hover {
+     cursor: pointer;
+     text-shadow:
+     -1px -1px 0 var(--secondary-color),  
+     1px -1px 0 var(--secondary-color),
+     -1px 1px 0 var(--secondary-color),
+     1px 1px 0 var(--secondary-color);
+ }
+
+/*the following before and afters for each list child create the icons next to the nav links*/
  .sidebar > .manageProfile > li:nth-child(1)::before {
     content: "";
     position: absolute;
@@ -378,6 +399,7 @@ li > img {
     position: absolute;
     left: -2.1vmin;
     top: 0.75vmin;
+    user-select: none;
  }
 
  .sidebar > .manageSettings > li:nth-child(3)::before {
@@ -408,12 +430,13 @@ li > img {
  }
 
 /*right-side top header menu*/
+/**/
 .userMenu {
     grid-area: usermenu;
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     padding: 0 1vmin 0 1vmin;
-    box-shadow: 0vmin 0.25vmin 1vmin 0.25vmin rgba(109,0,25,0.5);
+    box-shadow: 0vmin 0.5vmin 1vmin 0.25vmin var(--main-color);
     z-index: 0;
 }
 
@@ -442,7 +465,12 @@ li > img {
     background-color: transparent;
 }
 
-.searchBar::after{
+.searchBar:hover::before {
+    cursor: pointer;
+    border: 0.4vmin solid var(--secondary-color);
+}
+
+.searchBar::after {
     content: "";
     position: absolute;
     height: 0.3vmin;
@@ -453,6 +481,13 @@ li > img {
     transform: rotate(45deg);
 }
 
+.searchBar:hover::after {
+    cursor: pointer;
+    height: 0.35vmin;
+    width: 0.95vmin;
+    background: var(--secondary-color);
+}
+
 #lookup {
     appearance: none;
     width: 90%;
@@ -461,15 +496,23 @@ li > img {
     box-shadow: 0vmin 0.1vmin 0.5vmin 0.1vmin rgba(109,0,25,0.5) inset;
 }
 
+#lookup:hover {
+    box-shadow: 0vmin 0.1vmin 0.5vmin 0.1vmin var(--secondary-color) inset;
+}
+
 .notifications {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     align-items: center;
+    margin: 0;
+    padding: 0 2vmin 0 0;
 }
 
+/*the following creates a notification bell icon and animates it upon hovering*/
 .notifications > li:nth-child(1) {
+    padding: 0.5vmin;
     position: relative;
     height: 0.75vmin;
     width: 0.75vmin;
@@ -477,8 +520,22 @@ li > img {
     background-color: var(--main-color);
     top: -0.5vmin;
     left: 3vmin;
+    cursor: pointer;
 }
 
+.notifications > li:nth-child(1):hover {
+    animation-name: ring;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes ring {
+    0% {transform: rotate(-45deg);}
+    25% {transform: rotate(45deg);}
+    50% {transform: rotate(-45deg);}
+    75% {transform: rotate(45deg);}
+    100% {transform: rotate(-45deg);}
+}
 
 
 .notifications > li:nth-child(1)::before {
@@ -488,8 +545,23 @@ li > img {
     width: 0.75vmin;
     border-radius: 50%;
     background-color: var(--main-color);
-    top: 1.25vmin;
+    top: 1.3vmin;
+    left: -0.05vmin;
     transform: rotate(180deg);
+}
+
+.notifications > li:nth-child(1):hover::before {
+    animation-name: bell;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes bell {
+    0% {right: 0.25vmin;}
+    25% {left: 0.25vmin;}
+    50% {right: 0.25vmin;}
+    75% {left: 0.25vmin;}
+    100% {right: 0.25vmin;}
 }
 
 .notifications > li:nth-child(1)::after {
@@ -502,8 +574,8 @@ li > img {
     position: absolute;
     height: 0.65vmin;
     width: 1.5vmin;
-    left: -0.35vmin;
-    top: 0.35vmin;
+    left: -0.25vmin;
+    top: 0.3vmin;
     background-color: var(--main-color);
     border-bottom: 0.75vmin solid var(--main-color);
     border-radius: 50% 50% 50% 50% / 12% 12% 88% 88%;
@@ -513,21 +585,31 @@ li > img {
     0vmin -0.25vmin white;
 }
 
-.notifications {
-    margin: 0;
-    padding: 0 2vmin 0 0;
-}
-
 .notifications > li:nth-child(2) {
     width: 5vmin;
     height: 5vmin;
     border-radius: 50%;
     border: 0.25vmin solid var(--secondary-color);
+    cursor: pointer;
+}
+
+.notifications > li:nth-child(2):hover {
+    border: 0.35vmin solid var(--main-color);
 }
 
 .notifications > li > h3 {
     font-family: '8bit';
     font-size: 2vmin;
+    cursor: pointer;
+}
+
+.notifications > li > h3:hover {
+    color: white;
+    text-shadow:
+    -1px -1px 0 var(--main-color),  
+    1px -1px 0 var(--main-color),
+    -1px 1px 0 var(--main-color),
+    1px 1px 0 var(--main-color);
 }
 
 .activityMenu {
@@ -552,6 +634,11 @@ li > img {
     height: 7vmin;
     border-radius: 50%;
     border: 0.25vmin solid var(--secondary-color);
+    cursor: pointer;
+}
+
+.profilePic:hover {
+    border: 0.45vmin solid var(--main-color);
 }
 
 .user {
@@ -591,6 +678,19 @@ li > img {
     1px -1px 0 var(--main-color),
     -1px 1px 0 var(--main-color),
     1px 1px 0 var(--main-color);
+    cursor: pointer;
+}
+
+.activity > li > button:hover {
+    background-color: var(--main-color);
+    border-radius: 1vmin;
+    border: 0.25vmin solid var(--secondary-color);
+    text-shadow:
+    -1px -1px 0 var(--secondary-color),  
+    1px -1px 0 var(--secondary-color),
+    -1px 1px 0 var(--secondary-color),
+    1px 1px 0 var(--secondary-color);
+    box-shadow: 0.25vmin 0.25vmin 1vmin var(--main-color);
 }
 
 /*right-side main activity dashboard*/
@@ -606,7 +706,7 @@ li > img {
     0 1vmin 35vmin rgba(0, 0, 0, 0.6) inset,
     -7.5vmin 0 45vmin 7.5vmin rgba(0, 0, 0, 0.7) inset,
     1vmin 0 10vmin rgba(0, 0, 0, 0.6) inset;
-    height: 100%;
+    height: 83vh;
     width: 100%;
     grid-area: activityDash;
     display: grid;
@@ -615,7 +715,8 @@ li > img {
     "projects announcements"
     "projects trending";
     gap: 1.5vmin;
-    padding: 3vmin;
+    padding: 3vmin 3vmin 0vmin 3vmin; 
+    overflow: auto;
 }
 
 .activityDashboard > div > h3 {
@@ -629,21 +730,24 @@ li > img {
     1px -1px 0 var(--main-color),
     -1px 1px 0 var(--main-color),
     1px 1px 0 var(--main-color);
+    overflow: scroll;
 }
 
 .activityDiv1 {
     grid-area: projects;
 }
 
+/*project class is associated with posts (decided theme of page after creating layout, else the class would be posts)*/
 .projects {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 1.5vmin;
 }
 
+/*a blur filter is used to create a frosted glass effect as the background to each div, upon hovering the glass somewhat clears up*/
 .projects > div {
     display: grid;
-    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-rows: 1.5fr 4fr 1fr;
     position: relative;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(0.75vmin);
@@ -678,7 +782,7 @@ li > img {
 
 .projects > div > h4 {
     font-size: 2.25vmin;
-    margin: 1vmin 0 0.2vmin 0;
+    margin: 1vmin 0 0 0;
     padding-left: 1vmin;
 }
 
@@ -688,29 +792,45 @@ li > img {
     padding-left: 1vmin;
 }
 
+/*misinformation tag*/
+small {
+    background-color: red;
+    padding: 0.1vmin 0.5vmin 0.1vmin 0.5vmin;
+    border-radius: 1vmin;
+}
+
 .projects > div > ul {
     position: relative;
-    left: 50%;
+    left: 20%;
     list-style: none;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     height: 3vmin;
-    width: 50%;
+    width: 80%;
     margin: 0;
     padding: 0;
     justify-items: end;
 }
 
+.projects > div > ul > li {
+    user-select: none;
+    cursor: pointer;
+}
+
 .projects > div > ul > li:nth-child(1) {
     position: relative;
     top: 0.65vmin;
-    color: var(--main-color);
+    color: var(--secondary-color);
     width: 0px;
     height: 0px;
     border-right: 1vmin solid transparent;
     border-bottom: 0.7vmin solid var(--secondary-color);
     border-left: 1vmin solid transparent;
     transform: rotate(35deg);
+}
+
+.projects > div > ul > li:nth-child(1):hover {
+    opacity: 0.75;
 }
 
 .projects > div > ul > li:nth-child(1)::before {
@@ -750,7 +870,11 @@ li > img {
     background-color: transparent;
     border: 0.3vmin solid var(--main-color);
     border-radius: 50%;
-    top: 0.5vmin;
+    top: 0.4vmin;
+}
+
+.projects > div > ul > li:nth-child(2):hover {
+    font-size: 2.5vmin;
 }
 
 .projects > div > ul > li:nth-child(2)::before {
@@ -774,6 +898,10 @@ li > img {
     letter-spacing: -1vmin;
 }
 
+.projects > div > ul > li:nth-child(3):hover {
+    color: var(--secondary-color);
+}
+
 .projects > div > ul > li:nth-child(3)::before {
     content: "^";
     position: absolute;
@@ -791,7 +919,7 @@ li > img {
     background-color: white;
     border-radius: 50%;
     top: 1.3vmin;
-    left: 1.365vmin;
+    left: 1.34vmin;
 }
 
 .activityDiv2 {
@@ -896,11 +1024,25 @@ li > img {
     grid-template-columns: 1fr 3fr;
 }
 
+.trending > div:hover {
+    cursor: pointer;
+    text-shadow:
+    -1px -1px 0 var(--secondary-color),  
+    1px -1px 0 var(--secondary-color),
+    -1px 1px 0 var(--secondary-color),
+    1px 1px 0 var(--secondary-color);
+}
+
 .bitImg {
     height: 5vmin;
     width: 5vmin;
     border-radius: 50%;
     border: 0.15vmin solid var(--secondary-color);
+}
+
+.bitImg:hover {
+    border: 0.35vmin solid var(--main-color);
+    cursor: pointer;
 }
 
 /*user profile pic under trending section*/
